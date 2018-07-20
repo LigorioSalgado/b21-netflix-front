@@ -5,8 +5,8 @@ import login from '../../services/login';
 
 class Login extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             email:"",
             password:""
@@ -29,7 +29,7 @@ class Login extends Component{
             if(resp.status === 201){
                 let token = resp.data.token
                 localStorage.setItem('token',token);
-                alert("Te has Logeado con exito")
+                this.props.history.push('/')
             }else{
                 alert(resp.data)
             }

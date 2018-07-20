@@ -1,12 +1,44 @@
 import React, { Component } from 'react';
 import './style.css';
 import {Link}  from "react-router-dom"
+import payload from '../../resolvers/payload';
+import checkToken from '../../resolvers/checkToken';
 
 class Nav extends Component{
 
     constructor(){
         super();
     }
+
+    chargeProfile = ()=>{
+        if(checkToken()){
+            const token = localStorage.getItem('token')
+            let pl = payload(token);
+            return (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/perfil">Hola {pl.email}  !!</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/logout">Logout</Link>
+                    </li>
+                </ul>
+            )
+        }else{
+          return(  <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">Login</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/signup">Signup</Link>
+                            </li>
+                        
+                    </ul> 
+                )
+        }
+
+    }
+
 
 
     render(){
@@ -17,15 +49,7 @@ class Nav extends Component{
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" to="/signup">Signup</Link>
-                    </li>
-                    
-                    </ul>
+                        {this.chargeProfile()}
                 </div>
         </nav>
         )

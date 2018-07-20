@@ -5,8 +5,8 @@ import signup from '../../services/signup';
 
 class Signup extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             name:"",
             lastname:"",
@@ -17,6 +17,7 @@ class Signup extends Component{
     }
 
     onInpuntCheck = (event) => {
+        console.log(event)
         let name = event.target.name
         let value = event.target.value
 
@@ -42,7 +43,7 @@ class Signup extends Component{
         if(this.validatePasswords(this.state.password,this.state.check_password)){
             signup(this.state).then((response) => {
                 console.log(response.data)
-                alert("Felicidades Nuevo usuario registrado")
+                this.props.history.push('/login')
             }).catch((err) => {
                 console.log(err)
                 alert("Hubo un problema")
@@ -66,13 +67,13 @@ class Signup extends Component{
                                     <div className="row">
                                         <div className="col-xs-6 col-sm-6 col-md-6">
                                             <div className="form-group">
-                                    <input type="text" name="name" id="name" className="form-control input-sm" placeholder="First Name" value={this.state.name} 
+                                    <input type="text" name="name" className="form-control input-sm" placeholder="First Name" value={this.state.name} 
                                     onChange={this.onInputCheck}/>
                                             </div>
                                         </div>
                                         <div className="col-xs-6 col-sm-6 col-md-6">
                                             <div className="form-group">
-                                                <input type="text" name="lastname" id="name" className="form-control input-sm" placeholder="Last Name"  value={this.state.lastname} onChange={this.onInputCheck}/>
+                                                <input type="text" name="lastname" className="form-control input-sm" placeholder="Last Name"  value={this.state.lastname} onChange={this.onInputCheck}/>
                                             </div>
                                         </div>
                                     </div>
