@@ -11,6 +11,7 @@ import Logout from './components/Logout/Logout';
 import Movies from './components/Movies/Movies';
 import Movie from './components/Movie/Movie';
 import checkToken from './resolvers/checkToken';
+import FormMovie from './components/FormMovie/FormMovie'
 
 class Routes extends Component{
 
@@ -33,8 +34,10 @@ class Routes extends Component{
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/signup' component={Signup}/>
                     <PrivateRoute exact path='/logout' component={Logout}/>
-                    <PrivateRoute path="/movies"  component={Movies}/>
+                    <PrivateRoute exact path="/movies"  component={Movies}/>
                     <PrivateRoute exact path='/movie/:id' component={Movie}/>
+                    <PrivateRoute exact path='/movies/add' component={FormMovie}/>
+
 
                 </main>
             </Router>
