@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import allMovies from '../../services/allMovies';
+import addRate from '../../services/addRate';
+import CardMovie from '../CardMovie/CardMovie';
 import './style.css'
 
 
@@ -23,19 +25,24 @@ class Movies extends Component{
 
     }
 
+    redirect = (id) => {
+        this.props.history.push(`/movie/${id}`)
+    }
+
+    getRateValue = (id,rate) => {
+       addRate({id,rate}).then((resp) => {
+        console.log(resp)
+       })
+    }
+
     renderMovies  = () => {
         console.log(this.state)
         if(this.state.movies !== ""){
             let movies = this.state.movies.map((movie,index)=>{
                 return (
-                    <div className="card" style={{width: "14rem;"}} 
-                    onClick={() => this.props.history.push(`/movie/${movie._id}`)}
-                    key={index}>
-                        <h5 className="card-title">{movie.name}</h5>
-                        <div className="card-body">
-                            <p className="card-text">{movie.plot}</p>
-                        </div>
-                    </div>
+                    <CardMovie movie={movie} redirect={this.redirect}
+                        getRate={this.getRateValue} 
+                    />
                 )
             })
             return movies 

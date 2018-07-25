@@ -20,6 +20,9 @@ class Nav extends Component{
                         <Link className="nav-link" to="/perfil">Hola {pl.email}  !!</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/movies">Movies</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/logout">Logout</Link>
                     </li>
                 </ul>
