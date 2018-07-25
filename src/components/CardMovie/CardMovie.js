@@ -22,7 +22,7 @@ class CardMovie extends Component{
         // suma = suma/rate.length
 
         // return suma
-        let suma = rate.reduce((a,b)=>a+b)
+        let suma = rate.reduce((a,b)=>a+b,0)
         let average = suma/rate.length
         return (Math.round(average * 2) / 2).toFixed(1)
     }

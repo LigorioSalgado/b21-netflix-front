@@ -3,17 +3,19 @@ import Firebase from '../../Firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import allGenres from '../../services/allGenres';
 import allRatings from '../../services/allRatings';
+import addMovie from '../../services/addMovie';
 
 class FormMovie extends Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             name:"",
             plot:"",
             genre:"",
             director:"",
-            year:"", 
+            year:"",
+            url:"", 
             image_url:"",
             rating:"",
             allGenres:[],
@@ -73,7 +75,12 @@ class FormMovie extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        addMovie(this.state).then((resp) =>{
+            console.log(resp.data.data)
+            if(resp.data.data.addMovie._id){
+                this.props.history.push('/movies');
+            }
+        })
     }
 
     chargeForm = () =>{
@@ -96,6 +103,11 @@ class FormMovie extends Component{
                             <label htmlFor="">Genero</label>
                             {this.createSelecter(this.state.allGenres,"genre")}
                        </div>
+                       <div className="form-group">
+                            <label htmlFor="">Url</label>
+                            <input type="text" value={this.state.url} 
+                            className="form-control" name="url" onChange={this.onChangeInput}  />
+                        </div>
                        <div className="form-group">
                             <label htmlFor="">Director</label>
                             <input type="text" name="director" value={this.state.director}

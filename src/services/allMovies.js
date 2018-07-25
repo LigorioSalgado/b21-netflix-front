@@ -15,6 +15,7 @@ export default () => {
                         name,
                         plot,
                         director,
+                        image_url,
                         genre{
                             name
                         },
